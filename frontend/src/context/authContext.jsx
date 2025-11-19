@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }) => {
 
       // Send the login request using axios
       const response = await api.post(
-        "BASE_URL/api/users/login",
+        "/api/users/login",
         credentials // Ensure credentials is { email, password }
       );
 

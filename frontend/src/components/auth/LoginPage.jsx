@@ -36,7 +36,7 @@ const LoginPage = () => {
     try {
       // Send login request with credentials using axios
       const response = await api.post(
-        "BASE_URL/api/users/login",
+        "/api/users/login",
         credentials // Send the login credentials (email, password)
       );
       const { token } = response.data;
