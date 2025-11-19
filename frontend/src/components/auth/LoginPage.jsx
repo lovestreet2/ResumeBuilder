@@ -3,7 +3,7 @@ import { AuthContext } from "@/context/authContext";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { Loader2 } from "lucide-react"; // Import the loading spinner from Lucide/ShadCN
-import axios from "axios";
+import api from "API/api";
 
 const LoginPage = () => {
   const { login } = useContext(AuthContext); // Assuming you have a login function in your context
@@ -35,8 +35,8 @@ const LoginPage = () => {
 
     try {
       // Send login request with credentials using axios
-      const response = await axios.post(
-        "http://localhost:9090/api/users/login",
+      const response = await api.post(
+        "BASE_URL/api/users/login",
         credentials // Send the login credentials (email, password)
       );
       const { token } = response.data;

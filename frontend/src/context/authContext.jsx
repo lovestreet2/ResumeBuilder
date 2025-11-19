@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import api from "API/api";
 
 export const AuthContext = createContext();
 
@@ -34,8 +34,8 @@ export const AuthProvider = ({ children }) => {
       console.log("Login credentials being sent:", credentials);
 
       // Send the login request using axios
-      const response = await axios.post(
-        "http://localhost:9090/api/users/login",
+      const response = await api.post(
+        "BASE_URL/api/users/login",
         credentials // Ensure credentials is { email, password }
       );
 
@@ -76,8 +76,8 @@ export const AuthProvider = ({ children }) => {
     try {
       console.log("Sending user data:", credentials); // Debugging
 
-      const response = await axios.post(
-        "http://localhost:9090/api/users/register",
+      const response = await api.post(
+        "BASE_URL/api/users/register",
         credentials
       );
 
