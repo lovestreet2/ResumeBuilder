@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Label, Input, TextArea } from "../ui"; // Assuming you have these components
-import { jsPDF } from "jspdf"; // For PDF download
+import { Button } from "../ui/button";
+import { Label } from "../ui/label";
+import { Input } from "../ui/input";
 
 const ResumePreview = () => {
   const {

@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
-import { ResumeContext } from "../../context/resumeContext"; // ✅ Import ResumeContext
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { useNavigate } from "react-router-dom";
+import { ResumeContext } from "@/context/resumeContext.jsx";
+import WorkExperiencePreview from "./WorkExperiencePreview";
 
 const WorkExperience = () => {
   const navigate = useNavigate();
@@ -158,44 +159,8 @@ const WorkExperience = () => {
           </div>
         </form>
 
-        {/* Display Added Work Experiences */}
-        {experiences.length > 0 && (
-          <div className="mt-8">
-            <h3 className="text-2xl font-semibold mb-4">
-              Your Work Experiences
-            </h3>
-            <ul>
-              {experiences.map((exp, index) => (
-                <li key={index} className="mb-4">
-                  <h4 className="text-xl font-bold">
-                    {exp.jobTitle} - {exp.companyName}
-                  </h4>
-                  <p className="text-sm">Duration: {exp.workDuration}</p>
-                  {exp.jobDescription && (
-                    <p>
-                      <strong>Job Description:</strong> {exp.jobDescription}
-                    </p>
-                  )}
-                  {exp.achievements && (
-                    <p>
-                      <strong>Achievements:</strong> {exp.achievements}
-                    </p>
-                  )}
-                  {exp.skillsUsed && (
-                    <p>
-                      <strong>Skills Used:</strong> {exp.skillsUsed}
-                    </p>
-                  )}
-                  {exp.technologiesUsed && (
-                    <p>
-                      <strong>Technologies Used:</strong> {exp.technologiesUsed}
-                    </p>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {/* Display Personal Details Preview */}
+        <WorkExperiencePreview WorkExperienceData={{ ...formData, image }} />
 
         {/* Navigation Buttons */}
         <div className="flex justify-between mt-6">

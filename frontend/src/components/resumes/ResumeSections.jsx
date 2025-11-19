@@ -4,7 +4,8 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
-import { ResumeContext } from "../../context/ResumeContext"; // Import ResumeContext
+import { ResumeContext } from "@/context/resumeContext.jsx";
+import ResumePreview from "./ResumePreview";
 
 const ResumeSections = () => {
   const navigate = useNavigate();
@@ -234,6 +235,8 @@ const ResumeSections = () => {
             </div>
           </form>
         )}
+        {/* Display Personal Details Preview */}
+        <ResumePreview resumeData={{ ...formData, image }} />
 
         {/* Navigation Buttons */}
         <div className="flex justify-between mt-6">

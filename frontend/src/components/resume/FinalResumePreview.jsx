@@ -1,8 +1,8 @@
 import React, { useContext, useRef } from "react";
-import { ResumeContext } from "../../context/resumeContext";
 import { useReactToPrint } from "react-to-print";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
+import { ResumeContext } from "@/context/resumeContext.jsx";
 
 // Reusable Section Component
 const Section = ({ title, children }) =>
@@ -46,44 +46,50 @@ const FinalResumePreview = () => {
         {/* Resume Content */}
         <div ref={resumeRef} className="p-6 border rounded-lg">
           {/* Personal Details */}
-          {resumeData.personalDetails && (
-            <Section title="Personal Details">
-              <p>
-                <strong>Name:</strong>{" "}
-                {resumeData.personalDetails.firstname &&
-                resumeData.personalDetails.lastname
-                  ? `${resumeData.personalDetails.firstname} ${resumeData.personalDetails.lastname}`
-                  : "N/A"}
-              </p>
+          {resumeData.personalDetails &&
+            object.keys(resumeData.personalDetails).length > 0 && (
+              <Section title="Personal Details">
+                <p>
+                  <strong>Name:</strong>{" "}
+                  {resumeData.personalDetails.firstname &&
+                  resumeData.personalDetails.lastname
+                    ? `${resumeData.personalDetails.firstname} ${resumeData.personalDetails.lastname}`
+                    : "N/A"}
+                </p>
 
-              <p>
-                <strong>Email:</strong>{" "}
-                {resumeData.personalDetails.email || "N/A"}
-              </p>
-              <p>
-                <strong>Phone:</strong>{" "}
-                {resumeData.personalDetails.phone || "N/A"}
-              </p>
-              <p>
-                <strong>Address:</strong>{" "}
-                {resumeData.personalDetails.address || "N/A"}
-              </p>
-            </Section>
-          )}
+                <p>
+                  <strong>Email:</strong>{" "}
+                  {resumeData.personalDetails.email || "N/A"}
+                </p>
+                <p>
+                  <strong>Phone:</strong>{" "}
+                  {resumeData.personalDetails.phone || "N/A"}
+                </p>
+                <p>
+                  <strong>Address:</strong>{" "}
+                  {resumeData.personalDetails.address || "N/A"}
+                </p>
+              </Section>
+            )}
 
           {/* Education */}
           <Section title="Education">
-            {resumeData.education?.map((edu, index) => (
-              <p key={index}>
-                <strong>{edu.school || "N/A"}</strong> - {edu.degree || "N/A"} (
-                {edu.year || "N/A"})
-              </p>
-            ))}
+            {Array.isArray(resumeData.education) &&
+            resumeData.education.length > 0 ? (
+              resumeData.education.map((edu, index) => (
+                <p key={index}>
+                  <strong>{edu.school || "N/A"}</strong> - {edu.degree || "N/A"}{" "}
+                  ({edu.year || "N/A"})
+                </p>
+              ))
+            ) : (
+              <p>No education details available</p>
+            )}
           </Section>
 
           {/* Work Experience */}
           <Section title="Work Experience">
-            {resumeData.workExperience &&
+            {Array.isArray(resumeData.workExperience) &&
             resumeData.workExperience.length > 0 ? (
               resumeData.workExperience.map((job, index) => (
                 <p key={index}>
@@ -98,7 +104,8 @@ const FinalResumePreview = () => {
 
           {/* Skills */}
           <Section title="Skills">
-            {resumeData.skills && resumeData.skills.length > 0 ? (
+            {Array.isArray(resumeData.skills) &&
+            resumeData.skills.length > 0 ? (
               <ul className="list-disc ml-6">
                 {resumeData.skills.map((skill, index) => (
                   <li key={index}>{skill}</li>
@@ -111,42 +118,62 @@ const FinalResumePreview = () => {
 
           {/* Projects */}
           <Section title="Projects">
-            {resumeData.projects?.map((project, index) => (
-              <p key={index}>
-                <strong>{project.name || "N/A"}</strong> -{" "}
-                {project.description || "N/A"}
-              </p>
-            ))}
+            {Array.isArray(resumeData.projects) &&
+            resumeData.projects.length > 0 ? (
+              resumeData.projects.map((project, index) => (
+                <p key={index}>
+                  <strong>{project.name || "N/A"}</strong> -{" "}
+                  {project.description || "N/A"}
+                </p>
+              ))
+            ) : (
+              <p>No projects details available.</p>
+            )}
           </Section>
 
           {/* Certifications */}
           <Section title="Certifications">
-            {resumeData.certifications?.map((cert, index) => (
-              <p key={index}>
-                <strong>{cert.certificationName || "N/A"}</strong> -{" "}
-                {cert.certificationIssuer || "N/A"}
-              </p>
-            ))}
+            {Array.isArray(resumeData.certifications) &&
+            resumeData.certifications.length > 0 ? (
+              resumeData.certifications.map((cert, index) => (
+                <p key={index}>
+                  <strong>{cert.certificationName || "N/A"}</strong> -{" "}
+                  {cert.certificationIssuer || "N/A"}
+                </p>
+              ))
+            ) : (
+              <p>No certifications Available.</p>
+            )}
           </Section>
 
           {/* Languages */}
           <Section title="Languages">
-            {resumeData.languages?.map((lang, index) => (
-              <p key={index}>
-                <strong>{lang.language || "N/A"}</strong> -{" "}
-                {lang.proficiency || "N/A"}
-              </p>
-            ))}
+            {Array.isArray(resumeData.languages) &&
+            resumeData.languages.length > 0 ? (
+              resumeData.languages.map((lang, index) => (
+                <p key={index}>
+                  <strong>{lang.language || "N/A"}</strong> -{" "}
+                  {lang.proficiency || "N/A"}
+                </p>
+              ))
+            ) : (
+              <p>No languages available.</p>
+            )}
           </Section>
 
           {/* References */}
           <Section title="References">
-            {resumeData.references?.map((ref, index) => (
-              <p key={index}>
-                <strong>{ref.referenceName || "N/A"}</strong> -{" "}
-                {ref.referenceRelationship || "N/A"}
-              </p>
-            ))}
+            {Array.isArray(resumeData.references) &&
+            resumeData.references.length > 0 ? (
+              resumeData.references.map((ref, index) => (
+                <p key={index}>
+                  <strong>{ref.referenceName || "N/A"}</strong> -{" "}
+                  {ref.referenceRelationship || "N/A"}
+                </p>
+              ))
+            ) : (
+              <p>No references available.</p>
+            )}
           </Section>
         </div>
 

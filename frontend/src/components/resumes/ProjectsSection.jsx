@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
-import { ResumeContext } from "../../context/resumeContext"; // ✅ Import ResumeContext
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
 import { useNavigate } from "react-router-dom";
+import { ResumeContext } from "@/context/resumeContext.jsx";
+import ProjectsPreview from "./ProjectsPreview";
 
 const ProjectsSection = () => {
   const navigate = useNavigate();
@@ -118,39 +119,8 @@ const ProjectsSection = () => {
           </div>
         </form>
 
-        {/* Display Added Projects */}
-        {projects.length > 0 && (
-          <div className="mt-8">
-            <h3 className="text-2xl font-semibold mb-4">Your Projects</h3>
-            <ul>
-              {projects.map((project, index) => (
-                <li key={index} className="mb-4 border-b pb-2">
-                  <h4 className="text-xl font-bold">{project.projectTitle}</h4>
-                  <p className="text-sm">{project.projectDescription}</p>
-                  {project.projectUrl && (
-                    <p>
-                      <strong>URL:</strong>{" "}
-                      <a
-                        href={project.projectUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600"
-                      >
-                        {project.projectUrl}
-                      </a>
-                    </p>
-                  )}
-                  {project.technologiesUsed && (
-                    <p>
-                      <strong>Technologies Used:</strong>{" "}
-                      {project.technologiesUsed}
-                    </p>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {/* Display Personal Details Preview */}
+        <ProjectsPreview projectsData={{ ...formData, image }} />
 
         {/* Navigation Buttons */}
         <div className="flex justify-between mt-6">

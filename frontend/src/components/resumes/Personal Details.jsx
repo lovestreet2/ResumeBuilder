@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { ResumeContext } from "@/context/resumeContext";
+import { ResumeContext } from "@/context/resumeContext.jsx";
 import { Button } from "../ui/button";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";

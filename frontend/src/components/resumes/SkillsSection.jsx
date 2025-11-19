@@ -1,14 +1,15 @@
 import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
-import { ResumeContext } from "../../context/resumeContext"; // ✅ Import ResumeContext
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { useNavigate } from "react-router-dom";
+import { ResumeContext } from "@/context/resumeContext.jsx";
+import SkillsPreview from "./SkillsPreview";
 
 const SkillsSection = () => {
   const navigate = useNavigate();
-  const { resumeData, setResumeData } = useContext(ResumeContext); // ✅ Use ResumeContext
+  const { resumeData, setResumeData } = useContext(ResumeContext);
   const {
     register,
     handleSubmit,
@@ -77,19 +78,8 @@ const SkillsSection = () => {
           </div>
         </form>
 
-        {/* Display Added Skills */}
-        {skills.length > 0 && (
-          <div className="mt-8">
-            <h3 className="text-2xl font-semibold mb-4">Your Skills</h3>
-            <ul>
-              {skills.map((skill, index) => (
-                <li key={index} className="mb-4">
-                  <span className="text-xl font-bold">{skill}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        {/* Display skills Preview */}
+        <SkillsPreview resumeData={resumeData.skills} />
 
         {/* Navigation Buttons */}
         <div className="flex justify-between mt-6">
